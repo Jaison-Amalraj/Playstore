@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Redirecting to Appstore...</title>
+</head>
+<body>
+	<script type="text/javascript">
+	debugger;
+	var queryParamsMap = {};
+	var params = window.location.href.split('?')[1].split('&');
+	params.forEach(function(param){
+		var keyVal = param.split('=');
+		queryParamsMap[keyVal[0]] = keyVal[1];
+	});
+
+	//document.getElementById("home").innerText=JSON.stringify(queryParamsMap);
+	console.log(queryParamsMap)
+		
+		var link = "https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/";
+		
+	let entityId=queryParamsMap.id;
+		if(entityId.indexOf("::")!=-1)
+		{
+			var appIdAndReviewId=entityId.split("::");
+        link = link + appIdAndReviewId[0]+"/activity/ios/ratingsResponses?reviewId=" + appIdAndReviewId[1];
+		}
+		else
+		{
+			link = link + entityId+"/activity/ios/ratingsResponses";
+		}
+		
+		window.location.href=link;
+		console.log(link);
+		
+	</script>
+</body>
+</html>
