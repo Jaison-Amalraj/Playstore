@@ -23,6 +23,7 @@ let entity=queryParamsMap.entity;
 let packagename=null;
 let reviewId=null;
 let id=queryParamsMap.id;
+let parentId=queryParamsMap.parentId;
 if(entity == "ticket"){
 		if(id.indexOf("___") != -1){
 			packagename=id.split("___")[1];
@@ -32,9 +33,24 @@ if(entity == "ticket"){
 		}
 
 }else if(entity == "thread"){
+	
 		let ids=id.split("___");
+	
 		packagename=ids[1];
 		reviewId=ids[0];
+		if(Number(packagename))
+		{
+				if(parentId.indexOf("___") == -1)
+				{
+					packagename=id.split("___")[1];	
+				}
+				else
+				{
+					packagename=parentId;
+				}
+		}
+		
+	
 }
 
 let redirectURL=`https://play.google.com/store/apps/details?id=${packagename}`;
