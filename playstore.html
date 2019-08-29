@@ -42,11 +42,12 @@ if(entity == "ticket"){
 		{
 				if(parentId.indexOf("___") == -1)
 				{
-					packagename=parentId.split("___")[1];	
+					
+					packagename=parentId;
 				}
 				else
 				{
-					packagename=parentId;
+					packagename=parentId.split("___")[1];	
 				}
 		}
 		
