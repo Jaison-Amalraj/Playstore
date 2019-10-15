@@ -12,23 +12,30 @@
 		queryParamsMap[keyVal[0]] = keyVal[1];
 	});
 	console.log(queryParamsMap)
-	var link = "https://www.youtube.com/watch?v=";
-	let commentThreadId = queryParamsMap.id;
-	let videoId = queryParamsMap.parentId;
-	link = link + videoId +"&lc="+ commentThreadId;
-	/*let entityId=queryParamsMap.id;
-		if(entityId.indexOf("::")!=-1)
-		{
-			var appIdAndReviewId=entityId.split("::");
-        link = link + appIdAndReviewId[0]+"/activity/ios/ratingsResponses?reviewId=" + appIdAndReviewId[1];
+	var link = "https://www.youtube.com";
+	var entityId = queryParamsMap.id;
+	var entityParentId = queryParamsMap.parentId;
+	if("user_profile" == queryParamsMap.entity){
+		link = link + "/channel/" + entityId;
+	}
+	if("ticket" == queryParamsMap.entity){
+		if(entityId.indexOf(":::") > 1){
+			ids = entityId.split(":::");
+			link = link + "/watch?v=" + ids[1] +"&lc=" +ids[0];
+		}else{
+			link = link + "/watch?v=" + entityId;
 		}
-		else
-		{
-			link = link + entityId+"/activity/ios/ratingsResponses";
-		}*/
-		
-		window.location.href=link;
-		console.log(link);
+	}
+	if("thread" == queryParamsMap.entity){
+		if(entityParentId.indexOf(":::") > 1){
+			ids = entityParentId.split(":::");
+			link = link + "/watch?v=" + ids[1] +"&lc=" +ids[0];
+		}else{
+			link = link + "/watch?v=" + entityId + "&lc=" + entityParentId;
+		}
+	}	
+	window.location.href=link;
+	console.log(link);
 		
 	</script>
 </body>
