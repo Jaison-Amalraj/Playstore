@@ -31,7 +31,7 @@
 			ids = entityParentId.split(":::");
 			link = link + "/watch?v=" + ids[1] +"&lc=" +ids[0];
 		}else{
-			link = link + "/watch?v=" + entityId + "&lc=" + entityParentId;
+			link = link + "/watch?v=" + entityParentId + "&lc=" + entityId;
 		}
 	}	
 	window.location.href=link;
